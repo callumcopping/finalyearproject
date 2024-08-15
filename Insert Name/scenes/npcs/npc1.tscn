@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cp3ybc026drlq"]
+
+[ext_resource type="PackedScene" uid="uid://bnmu6pqa0whpp" path="res://scenes/npcs/baseNPC.tscn" id="1_hb0lh"]
+[ext_resource type="Texture2D" uid="uid://cavxvasi1j6gv" path="res://assets/npcs/npc1.png" id="2_rsuvl"]
+[ext_resource type="Script" path="res://scenes/npcs/weaponNPC.gd" id="2_u348y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8cj6"]
+size = Vector2(71, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jpehp"]
+size = Vector2(16, 16)
+
+[node name="NPC1" instance=ExtResource("1_hb0lh")]
+script = ExtResource("2_u348y")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_rsuvl")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_u8cj6")
+
+[node name="InRangePrompt" parent="." index="2"]
+text = "Press enter 
+2 cycle weapons"
+
+[node name="CollisionShape2D" parent="." index="3"]
+shape = SubResource("RectangleShape2D_jpehp")

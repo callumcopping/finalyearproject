@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://8isyxyqd5dtu"]
+
+[ext_resource type="Script" path="res://tools/levelVisualization.gd" id="1_041kk"]
+[ext_resource type="Script" path="res://tools/dragAround.gd" id="2_qab3u"]
+
+[node name="LevelVisualization" type="Node2D"]
+script = ExtResource("1_041kk")
+levelToPreview = "res://scenes/levels/level2/level_two.tscn"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_qab3u")

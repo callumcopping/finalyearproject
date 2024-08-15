@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnogv56jkxwj6"]
+
+[ext_resource type="Script" path="res://scenes/characters/baseCharacter.gd" id="1_j0kj3"]
+[ext_resource type="Script" path="res://scenes/characters/states/stateBrain.gd" id="2_5nn6b"]
+[ext_resource type="Script" path="res://scenes/characters/states/characterStates/characterHurt.gd" id="3_ut7ax"]
+[ext_resource type="Script" path="res://scenes/characters/states/characterStates/characterDead.gd" id="4_u6mm5"]
+
+[node name="BaseCharacter" type="CharacterBody2D"]
+script = ExtResource("1_j0kj3")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+animation = &""
+
+[node name="HpDisplay" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 20.0
+offset_bottom = -2.0
+
+[node name="StateBrain" type="Node" parent="."]
+script = ExtResource("2_5nn6b")
+
+[node name="CharacterHurt" type="Node" parent="StateBrain"]
+script = ExtResource("3_ut7ax")
+
+[node name="CharacterDead" type="Node" parent="StateBrain"]
+script = ExtResource("4_u6mm5")

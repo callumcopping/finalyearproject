@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqi2bua4u68cg"]
+
+[ext_resource type="PackedScene" uid="uid://dfocuedqd42mr" path="res://scenes/characters/enemies/enemy.tscn" id="1_kbsp7"]
+
+[node name="FastEnemy" instance=ExtResource("1_kbsp7")]
+enemyAccerelation = 80
+enemyMaxSpeed = 150
+
+[node name="Sprite" parent="." index="1"]
+modulate = Color(0.439216, 0.588235, 0.701961, 0.992157)
+
+[node name="Area2D" parent="." index="2"]
+visible = false

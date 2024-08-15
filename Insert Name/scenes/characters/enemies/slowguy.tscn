@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc2qiqm6ad6ut"]
+
+[ext_resource type="PackedScene" uid="uid://dfocuedqd42mr" path="res://scenes/characters/enemies/enemy.tscn" id="1_0etid"]
+
+[node name="Enemy" instance=ExtResource("1_0etid")]
+enemyAccerelation = 10
+enemyMaxSpeed = 10
+contactDamage = 10

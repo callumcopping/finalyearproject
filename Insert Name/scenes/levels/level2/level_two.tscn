@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://drhi2ikldx8q"]
+
+[ext_resource type="Script" path="res://scenes/levels/level2/level_two.gd" id="1_drqxj"]
+[ext_resource type="Texture2D" uid="uid://cgjeb0nfliilh" path="res://assets/levels/floor_and_walls_and_doors.png" id="2_21dr8"]
+[ext_resource type="PackedScene" uid="uid://b3hfyvtgq2kd4" path="res://scenes/levels/transitionArea.tscn" id="3_8lpvt"]
+[ext_resource type="Texture2D" uid="uid://b7if44ospjrhc" path="res://assets/levels/exitfloor.png" id="4_kvvou"]
+[ext_resource type="PackedScene" uid="uid://di0863rmn84tw" path="res://scenes/characters/player/pickups/weaponPickup.tscn" id="5_e3l7j"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_mixmd"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p7xpp"]
+texture = ExtResource("2_21dr8")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/next_alternative_id = 3
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_mixmd")
+1:0/1 = 1
+1:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/1/physics_layer_0/angular_velocity = 0.0
+2:0/next_alternative_id = 2
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_dj3f1"]
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 3
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_p7xpp")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ped6r"]
+size = Vector2(80, 16)
+
+[node name="levelTwo" type="Node2D" groups=["levels"]]
+script = ExtResource("1_drqxj")
+levelSize = Vector2i(200, 200)
+
+[node name="FloorAndWalls" type="TileMap" parent="."]
+z_index = -1
+tile_set = SubResource("TileSet_dj3f1")
+format = 2
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+
+[node name="TransitionArea" parent="." instance=ExtResource("3_8lpvt")]
+visible = false
+targetLevel = "res://scenes/levels/hubWorld.tscn"
+
+[node name="Sprite2D" type="Sprite2D" parent="TransitionArea"]
+texture = ExtResource("4_kvvou")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+shape = SubResource("RectangleShape2D_ped6r")
+
+[node name="WeaponPickup" parent="." instance=ExtResource("5_e3l7j")]
+visible = false
+monitoring = false
+weaponType = 2

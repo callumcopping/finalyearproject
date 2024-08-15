@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnmu6pqa0whpp"]
+
+[ext_resource type="Script" path="res://scenes/npcs/baseNPC.gd" id="1_s4oj1"]
+
+[node name="NPC" type="CharacterBody2D"]
+collision_layer = 32
+script = ExtResource("1_s4oj1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="InRangePrompt" type="Label" parent="."]
+visible = false
+offset_left = -40.0
+offset_top = -64.0
+offset_right = 151.0
+offset_bottom = -12.0
+text = "Press enter 
+2 talk to me"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

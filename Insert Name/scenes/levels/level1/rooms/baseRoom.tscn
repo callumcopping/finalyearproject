@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://cs25pbbb2knyy"]
+
+[ext_resource type="Script" path="res://scenes/levels/level1/rooms/baseRoom.gd" id="1_biuqb"]
+[ext_resource type="Texture2D" uid="uid://dcf44uvyr8s3p" path="res://assets/levels/floor_and_walls.png" id="2_mklb1"]
+[ext_resource type="PackedScene" uid="uid://bohvmmbcuqq5k" path="res://scenes/characters/player/pickups/healthPickup.tscn" id="3_wosjn"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_13ue1"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y64f0"]
+texture = ExtResource("2_mklb1")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_13ue1")
+
+[sub_resource type="TileSet" id="TileSet_jlu3a"]
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 3
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_y64f0")
+
+[node name="BaseRoom" type="Node2D"]
+script = ExtResource("1_biuqb")
+
+[node name="FloorAndWalls" type="TileMap" parent="."]
+z_index = -1
+tile_set = SubResource("TileSet_jlu3a")
+format = 2
+
+[node name="Entrance" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entrance"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Entrance"]
+
+[node name="EntranceDetector" type="Area2D" parent="."]
+
+[node name="Exit" type="StaticBody2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Exit"]
+
+[node name="EnemyPos" type="Node2D" parent="."]
+
+[node name="HealthPickup" parent="." instance=ExtResource("3_wosjn")]
+visible = false
+monitoring = false
+
+[connection signal="body_entered" from="EntranceDetector" to="." method="_on_entrance_detector_body_entered"]

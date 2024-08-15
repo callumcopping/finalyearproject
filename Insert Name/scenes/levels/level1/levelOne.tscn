@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://35maf37p6kaq"]
+
+[ext_resource type="Script" path="res://scenes/levels/level1/levelOne.gd" id="1_x1jq5"]
+
+[node name="levelOne" type="Node2D" groups=["levels"]]
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+
+[node name="roomSpawner" type="Node2D" parent="."]
+script = ExtResource("1_x1jq5")

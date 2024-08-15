@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpx0m6dtf8sj1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkmac"]
+bg_color = Color(0, 0.278431, 0.670588, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hqpv"]
+bg_color = Color(0.4, 0.698039, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flipv"]
+bg_color = Color(0, 0.278431, 0.670588, 1)
+
+[node name="Remaper" type="GridContainer"]
+columns = 2
+
+[node name="ActionName" type="Label" parent="."]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "Action"
+
+[node name="RemapButton" type="Button" parent="."]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_qkmac")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8hqpv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_flipv")
+toggle_mode = true
+text = "Key"

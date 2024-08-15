@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvfedose281s0"]
+
+[ext_resource type="PackedScene" uid="uid://imphfa6klkkr" path="res://scenes/characters/player/player.tscn" id="1_8cixa"]
+[ext_resource type="Script" path="res://scenes/gameWorld.gd" id="1_x1djm"]
+[ext_resource type="PackedScene" uid="uid://cv85q6awdpste" path="res://scenes/UI/pause/PauseDisplay.tscn" id="3_jq3gp"]
+
+[node name="Game World" type="Node2D"]
+script = ExtResource("1_x1djm")
+
+[node name="Levels" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_8cixa")]
+z_index = 1
+
+[node name="PauseDisplay" parent="Player" instance=ExtResource("3_jq3gp")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 75
+
+[connection signal="level_completed" from="." to="." method="_on_level_completed"]

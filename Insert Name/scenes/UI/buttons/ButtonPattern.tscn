@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://diac0at4uhnn2"]
+
+[ext_resource type="Script" path="res://scenes/UI/buttons/ButtonPattern.gd" id="1_1t7yo"]
+[ext_resource type="Script" path="res://scenes/UI/buttons/ButtonCommand.gd" id="2_l7hyn"]
+
+[node name="ButtonPattern" type="Button"]
+script = ExtResource("1_1t7yo")
+
+[node name="ButtonCommand" type="Node" parent="."]
+script = ExtResource("2_l7hyn")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

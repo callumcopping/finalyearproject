@@ -1,0 +1,130 @@
+[gd_scene load_steps=20 format=3 uid="uid://imphfa6klkkr"]
+
+[ext_resource type="PackedScene" uid="uid://dnogv56jkxwj6" path="res://scenes/characters/baseCharacter.tscn" id="1_irc67"]
+[ext_resource type="Script" path="res://scenes/characters/player/player.gd" id="2_yyyle"]
+[ext_resource type="Texture2D" uid="uid://gatkeifr6k7k" path="res://assets/player/player.png" id="3_vd6kx"]
+[ext_resource type="Texture2D" uid="uid://bkqyxmm6j2i3f" path="res://assets/player/player_hurt.png" id="3_w1lnp"]
+[ext_resource type="Texture2D" uid="uid://dkvmi37tpc0v2" path="res://assets/player/player_move.png" id="5_6475o"]
+[ext_resource type="Script" path="res://scenes/characters/states/playerStates/playerIdle.gd" id="5_x1rqn"]
+[ext_resource type="Script" path="res://scenes/characters/states/playerStates/playerMoveAndShoot.gd" id="6_3jahx"]
+[ext_resource type="PackedScene" uid="uid://cwxsxf438yt67" path="res://scenes/characters/weapons/weapon.tscn" id="6_k4l7u"]
+[ext_resource type="Script" path="res://scenes/characters/states/playerStates/playerDash.gd" id="7_logxy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6krae"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qs4w"]
+atlas = ExtResource("3_w1lnp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0tex"]
+atlas = ExtResource("3_w1lnp")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mvxf"]
+atlas = ExtResource("3_w1lnp")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ylyy"]
+atlas = ExtResource("3_w1lnp")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ducyp"]
+atlas = ExtResource("5_6475o")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2hjk"]
+atlas = ExtResource("5_6475o")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hn410"]
+atlas = ExtResource("5_6475o")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyjuo"]
+atlas = ExtResource("5_6475o")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aijh8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qs4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0tex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mvxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ylyy")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vd6kx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ducyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2hjk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hn410")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyjuo")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="Player" instance=ExtResource("1_irc67")]
+collision_mask = 126
+script = ExtResource("2_yyyle")
+playerAccerelation = 100
+playerMaxAcc = 400
+playerSpeed = 300
+playerMaxSpeed = 600
+playerMaxHp = 3
+maxMaxHp = 8
+dashDuration = 0.4
+dashSpeed = 1000
+dashCooldown = 1.0
+minDashColldown = 0.5
+essence = 25
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_6krae")
+
+[node name="Sprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_aijh8")
+animation = &"hurt"
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
+zoom = Vector2(4, 4)
+
+[node name="Weapon" parent="." index="4" instance=ExtResource("6_k4l7u")]
+
+[node name="StateBrain" parent="." index="5" node_paths=PackedStringArray("initialState")]
+initialState = NodePath("PlayerIdle")
+
+[node name="PlayerIdle" type="Node" parent="StateBrain" index="0"]
+script = ExtResource("5_x1rqn")
+
+[node name="PlayerMoveAndShoot" type="Node" parent="StateBrain" index="1"]
+script = ExtResource("6_3jahx")
+
+[node name="PlayerDash" type="Node" parent="StateBrain" index="2"]
+script = ExtResource("7_logxy")

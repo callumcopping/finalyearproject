@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://du1c2bbicnlc1"]
+
+[ext_resource type="PackedScene" uid="uid://bnmu6pqa0whpp" path="res://scenes/npcs/baseNPC.tscn" id="1_jnvod"]
+[ext_resource type="Script" path="res://scenes/npcs/submittimeNPC.gd" id="2_jj7u4"]
+[ext_resource type="Texture2D" uid="uid://tg6u4qic5d06" path="res://assets/npcs/npc3.png" id="3_isht8"]
+[ext_resource type="PackedScene" uid="uid://8oyoeoh8i323" path="res://scenes/UI/leaderboard/scoreSubmit.tscn" id="3_wha84"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dp3fl"]
+size = Vector2(68, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_seksi"]
+size = Vector2(16, 16)
+
+[node name="NPC3" instance=ExtResource("1_jnvod")]
+script = ExtResource("2_jj7u4")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_isht8")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_dp3fl")
+
+[node name="InRangePrompt" parent="." index="2"]
+text = "Press enter 
+2 submit score"
+
+[node name="CollisionShape2D" parent="." index="3"]
+shape = SubResource("RectangleShape2D_seksi")
+
+[node name="ScoreSubmit" parent="." index="4" instance=ExtResource("3_wha84")]
+visible = false

@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://45cr6s61j0uk"]
+
+[ext_resource type="Script" path="res://scenes/UI/main menu/MainMenu.gd" id="1_dh6gy"]
+[ext_resource type="PackedScene" uid="uid://diac0at4uhnn2" path="res://scenes/UI/buttons/ButtonPattern.tscn" id="1_u3cug"]
+[ext_resource type="PackedScene" uid="uid://cwt0l7o486lc3" path="res://scenes/UI/settings/InputRemap.tscn" id="2_4c6hk"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dh6gy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -383.5
+offset_top = -420.0
+offset_right = -190.5
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+
+[node name="Start" parent="VBoxContainer" instance=ExtResource("1_u3cug")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Start"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+
+[node name="Leaderboard" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Leaderboard"
+
+[node name="Quit" parent="VBoxContainer" instance=ExtResource("1_u3cug")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+
+[node name="InputRemap" parent="." instance=ExtResource("2_4c6hk")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -470.0
+offset_top = -324.0
+offset_right = 469.0
+offset_bottom = 331.0
+
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]

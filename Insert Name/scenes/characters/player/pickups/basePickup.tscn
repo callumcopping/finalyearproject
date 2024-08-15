@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgetp5tt3jheh"]
+
+[ext_resource type="Script" path="res://scenes/characters/player/pickups/basePickup.gd" id="1_3vd8r"]
+
+[node name="BasePickup" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_3vd8r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_pickup"]

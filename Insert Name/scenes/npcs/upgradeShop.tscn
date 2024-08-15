@@ -1,0 +1,331 @@
+[gd_scene load_steps=11 format=3 uid="uid://c88amcm1oqyr6"]
+
+[ext_resource type="Script" path="res://scenes/npcs/upgradeShop.gd" id="1_hstkm"]
+[ext_resource type="Texture2D" uid="uid://wktfrb6mubqw" path="res://assets/pickups/health.png" id="2_4iq2k"]
+[ext_resource type="Texture2D" uid="uid://dh4me6hmgmgd7" path="res://assets/npcs/shop/healthUpgrade.png" id="3_rbw4i"]
+[ext_resource type="Texture2D" uid="uid://c8mkfgcy282tf" path="res://assets/npcs/shop/speedIncrease.png" id="4_5ufvp"]
+[ext_resource type="Texture2D" uid="uid://bndn1llju4u37" path="res://assets/npcs/shop/dashDecrease.png" id="5_yb3ps"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qysrq"]
+bg_color = Color(0.784314, 0.564706, 0.784314, 1)
+
+[sub_resource type="Animation" id="Animation_p34yn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -500)]
+}
+
+[sub_resource type="Animation" id="Animation_yx6wy"]
+resource_name = "transitonIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1000), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i7gg4"]
+resource_name = "transitonOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1500)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sm2q2"]
+_data = {
+"RESET": SubResource("Animation_p34yn"),
+"transitonIn": SubResource("Animation_yx6wy"),
+"transitonOut": SubResource("Animation_i7gg4")
+}
+
+[node name="UpgradeShop" type="CanvasLayer"]
+process_mode = 3
+offset = Vector2(0, -500)
+scale = Vector2(1.5, 1.5)
+transform = Transform2D(1.5, 0, 0, 1.5, 0, -500)
+script = ExtResource("1_hstkm")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.203993
+anchor_top = 0.029321
+anchor_right = 0.97309
+anchor_bottom = 0.873457
+offset_bottom = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_qysrq")
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sm2q2")
+}
+
+[node name="Close" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.884
+anchor_top = 0.07
+anchor_right = 0.935
+anchor_bottom = 0.11677
+offset_left = 0.298645
+offset_top = -0.0266571
+offset_right = -0.453735
+offset_bottom = 0.666382
+grow_horizontal = 2
+grow_vertical = 2
+text = "Close
+"
+
+[node name="essenceDisplay" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.22338
+anchor_top = 0.0689301
+anchor_right = 0.280671
+anchor_bottom = 0.104424
+offset_left = -8.66711
+offset_top = -6.00004
+offset_right = 48.3336
+offset_bottom = 12.9999
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Essence:"
+metadata/_edit_use_anchors_ = true
+
+[node name="Heal" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.328
+anchor_top = 0.329
+anchor_right = 0.402
+anchor_bottom = 0.405
+offset_left = -1.18933
+offset_top = 0.141403
+offset_right = -0.437317
+offset_bottom = -0.106659
+grow_horizontal = 2
+grow_vertical = 2
+text = "Heal
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Desc" type="Label" parent="Heal"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.531008
+anchor_top = 2.8083
+anchor_right = 0.531008
+anchor_bottom = 2.8083
+offset_left = -116.333
+offset_top = -128.273
+offset_right = 32.6667
+offset_bottom = 42.7268
+scale = Vector2(1.5, 1.5)
+theme_override_font_sizes/font_size = 40
+text = "Heal 1 hp 
+Cost: 5"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon" type="TextureRect" parent="Heal"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.535
+anchor_top = -1.497
+anchor_right = 0.535
+anchor_bottom = -1.497
+offset_left = -42.6767
+offset_top = -39.9803
+offset_right = -26.6767
+offset_bottom = -23.9803
+scale = Vector2(5, 5)
+texture = ExtResource("2_4iq2k")
+
+[node name="IncreaseHp" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.476
+anchor_top = 0.325
+anchor_right = 0.55
+anchor_bottom = 0.408
+offset_left = -0.35199
+offset_top = 0.0667267
+offset_right = 0.399963
+offset_bottom = 0.282745
+grow_horizontal = 2
+grow_vertical = 2
+text = "Upgrade
+Max HP"
+metadata/_edit_use_anchors_ = true
+
+[node name="Desc" type="Label" parent="IncreaseHp"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.494
+anchor_top = 2.68626
+anchor_right = 0.494
+anchor_bottom = 2.68626
+offset_left = -150.484
+offset_top = -171.725
+offset_right = 50.1827
+offset_bottom = 57.2752
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+theme_override_font_sizes/font_size = 40
+text = "Increase max hp by 1
+Cost: 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon" type="TextureRect" parent="IncreaseHp"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.462
+anchor_top = -1.086
+anchor_right = 0.462
+anchor_bottom = -1.086
+offset_left = -39.983
+offset_top = -40.0226
+offset_right = -23.983
+offset_bottom = -24.0226
+scale = Vector2(5, 5)
+texture = ExtResource("3_rbw4i")
+metadata/_edit_use_anchors_ = true
+
+[node name="IncreaseSpeed" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.643
+anchor_top = 0.323
+anchor_right = 0.718
+anchor_bottom = 0.396
+offset_left = -0.069397
+offset_top = 0.0294037
+offset_right = 0.53064
+offset_bottom = 9.7254
+grow_horizontal = 2
+grow_vertical = 2
+text = "Upgrade
+Speed"
+metadata/_edit_use_anchors_ = true
+
+[node name="Desc" type="Label" parent="IncreaseSpeed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.553641
+anchor_top = 2.57785
+anchor_right = 0.553641
+anchor_bottom = 2.57785
+offset_left = -126.833
+offset_top = -128.271
+offset_right = 37.1667
+offset_bottom = 42.7292
+scale = Vector2(1.5, 1.5)
+theme_override_font_sizes/font_size = 40
+text = "Increase speed
+Cost: 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon" type="TextureRect" parent="IncreaseSpeed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48
+anchor_top = -1.086
+anchor_right = 0.5
+anchor_bottom = -1.086
+offset_left = -37.3333
+offset_top = -40.0226
+offset_right = -22.8333
+offset_bottom = -24.0226
+scale = Vector2(5, 5)
+texture = ExtResource("4_5ufvp")
+metadata/_edit_use_anchors_ = true
+
+[node name="DashCooldown" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.804
+anchor_top = 0.326
+anchor_right = 0.883
+anchor_bottom = 0.417
+offset_left = 0.458679
+offset_top = 0.0854187
+offset_right = -0.549377
+offset_bottom = 0.117432
+grow_horizontal = 2
+grow_vertical = 2
+text = "Upgrade
+Dash"
+metadata/_edit_use_anchors_ = true
+
+[node name="Desc" type="Label" parent="DashCooldown"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 2.665
+anchor_right = 0.5
+anchor_bottom = 2.665
+offset_left = -144.333
+offset_top = -215.235
+offset_right = 47.6667
+offset_bottom = 71.7648
+scale = Vector2(1.5, 1.5)
+theme_override_font_sizes/font_size = 40
+text = "Decrease cooldown by 0.1 sec
+Cost: 20"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon" type="TextureRect" parent="DashCooldown"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48
+anchor_top = -1.086
+anchor_right = 0.48
+anchor_bottom = -1.086
+offset_left = -42.6667
+offset_top = -40.0225
+offset_right = -26.6667
+offset_bottom = -24.0225
+scale = Vector2(5, 5)
+texture = ExtResource("5_yb3ps")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Heal" to="." method="_on_heal_pressed"]
+[connection signal="pressed" from="IncreaseHp" to="." method="_on_increase_hp_pressed"]
+[connection signal="pressed" from="IncreaseSpeed" to="." method="_on_increase_speed_pressed"]
+[connection signal="pressed" from="DashCooldown" to="." method="_on_dash_cooldown_pressed"]

@@ -1,0 +1,157 @@
+[gd_scene load_steps=23 format=3 uid="uid://dfocuedqd42mr"]
+
+[ext_resource type="PackedScene" uid="uid://dnogv56jkxwj6" path="res://scenes/characters/baseCharacter.tscn" id="1_sjqxo"]
+[ext_resource type="Script" path="res://scenes/characters/enemies/enemy.gd" id="2_vh8jw"]
+[ext_resource type="Texture2D" uid="uid://c3tf8pkhywp0g" path="res://assets/enemies/enemy_chase.png" id="3_8herq"]
+[ext_resource type="Script" path="res://scenes/characters/states/enemyStates/enemyWander.gd" id="4_4t57n"]
+[ext_resource type="Texture2D" uid="uid://ccoxm8byxxsja" path="res://assets/enemies/enemy_hurt.png" id="4_tu0p0"]
+[ext_resource type="Texture2D" uid="uid://cnb1t2vov2u5a" path="res://assets/enemies/enemy.png" id="5_dygge"]
+[ext_resource type="Script" path="res://scenes/characters/states/enemyStates/enemyChase.gd" id="5_opkbh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65auh"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pll5"]
+atlas = ExtResource("3_8herq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvesm"]
+atlas = ExtResource("3_8herq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1m72"]
+atlas = ExtResource("3_8herq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0p2h"]
+atlas = ExtResource("3_8herq")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2cth"]
+atlas = ExtResource("3_8herq")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hr6k"]
+atlas = ExtResource("3_8herq")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jiqcr"]
+atlas = ExtResource("3_8herq")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_es307"]
+atlas = ExtResource("4_tu0p0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uoudb"]
+atlas = ExtResource("4_tu0p0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rceaj"]
+atlas = ExtResource("4_tu0p0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxh02"]
+atlas = ExtResource("4_tu0p0")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4pmr"]
+atlas = ExtResource("4_tu0p0")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c00ko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pll5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvesm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1m72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0p2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2cth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hr6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jiqcr")
+}],
+"loop": true,
+"name": &"chase",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_es307")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uoudb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rceaj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxh02")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4pmr")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_dygge")
+}],
+"loop": true,
+"name": &"wander",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rt53"]
+size = Vector2(18, 18)
+
+[node name="Enemy" instance=ExtResource("1_sjqxo")]
+collision_layer = 2
+collision_mask = 79
+script = ExtResource("2_vh8jw")
+enemyAccerelation = 40
+enemyMaxSpeed = 100
+contactDamage = 1
+
+[node name="CollisionShape2D" parent="." index="0"]
+scale = Vector2(0.7, 0.7)
+shape = SubResource("RectangleShape2D_65auh")
+
+[node name="Sprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_c00ko")
+animation = &"hurt"
+frame = 1
+frame_progress = 0.837052
+
+[node name="Area2D" type="Area2D" parent="." index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_6rt53")
+
+[node name="StateBrain" parent="." index="4" node_paths=PackedStringArray("initialState")]
+initialState = NodePath("EnemyWander")
+
+[node name="EnemyWander" type="Node" parent="StateBrain" index="0"]
+script = ExtResource("4_4t57n")
+
+[node name="EnemyChase" type="Node" parent="StateBrain" index="1"]
+script = ExtResource("5_opkbh")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="5"]
+path_postprocessing = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

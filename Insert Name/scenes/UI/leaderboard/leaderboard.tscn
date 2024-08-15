@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgyapw132qs2g"]
+
+[ext_resource type="PackedScene" uid="uid://de5nks52pxc80" path="res://addons/silent_wolf/examples/CustomLeaderboards/ReverseLeaderboard.tscn" id="1_6kg32"]
+
+[node name="Leaderboard" type="CanvasLayer"]
+
+[node name="ReverseLeaderboard" parent="." instance=ExtResource("1_6kg32")]

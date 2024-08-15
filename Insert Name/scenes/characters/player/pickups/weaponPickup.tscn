@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://di0863rmn84tw"]
+
+[ext_resource type="PackedScene" uid="uid://cgetp5tt3jheh" path="res://scenes/characters/player/pickups/basePickup.tscn" id="1_svbc7"]
+[ext_resource type="Script" path="res://scenes/characters/player/pickups/weaponPickup.gd" id="2_3gfow"]
+[ext_resource type="Texture2D" uid="uid://q2hli1tp6fku" path="res://assets/pickups/weaponpickup.png" id="3_1u7bf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4aq1"]
+size = Vector2(8, 8)
+
+[node name="WeaponPickup" instance=ExtResource("1_svbc7")]
+script = ExtResource("2_3gfow")
+weaponType = 1
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_i4aq1")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_1u7bf")
